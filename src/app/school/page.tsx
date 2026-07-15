@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { BookOpen, ChevronRight, Atom, Calculator, BookMarked, FlaskConical, Sigma, Globe } from 'lucide-react';
+import { BookOpen, ChevronRight, Atom, Calculator, BookMarked, FlaskConical, Sigma, Globe, Briefcase, LineChart, Monitor } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'School Notes — Class 10 & 12',
@@ -9,14 +9,45 @@ export const metadata: Metadata = {
 
 const GRADES = [
   {
+    grade: 'class-8',
+    label: 'Class 8',
+    subtitle: 'BLE Preparation',
+    subjects: [
+      { name: 'Science', href: '/school/class-8/science', icon: Atom, color: '#6366f1' },
+      { name: 'Compulsory Mathematics', href: '/school/class-8/compulsory-mathematics', icon: Calculator, color: '#8b5cf6' },
+      { name: 'Optional Mathematics', href: '/school/class-8/optional-mathematics', icon: Sigma, color: '#ec4899' },
+      { name: 'Accounting/Office Management', href: '/school/class-8/accounting', icon: Briefcase, color: '#10b981' },
+      { name: 'Economics', href: '/school/class-8/economics', icon: LineChart, color: '#f59e0b' },
+      { name: 'Social Studies', href: '/school/class-8/social-studies', icon: Globe, color: '#3b82f6' },
+      { name: 'Computer Science', href: '/school/class-8/computer-science', icon: Monitor, color: '#8b5cf6' },
+    ],
+  },
+  {
+    grade: 'class-9',
+    label: 'Class 9',
+    subtitle: 'Secondary Curriculum',
+    subjects: [
+      { name: 'Science', href: '/school/class-9/science', icon: Atom, color: '#6366f1' },
+      { name: 'Compulsory Mathematics', href: '/school/class-9/compulsory-mathematics', icon: Calculator, color: '#8b5cf6' },
+      { name: 'Optional Mathematics', href: '/school/class-9/optional-mathematics', icon: Sigma, color: '#ec4899' },
+      { name: 'Accounting/Office Management', href: '/school/class-9/accounting', icon: Briefcase, color: '#10b981' },
+      { name: 'Economics', href: '/school/class-9/economics', icon: LineChart, color: '#f59e0b' },
+      { name: 'Social Studies', href: '/school/class-9/social-studies', icon: Globe, color: '#3b82f6' },
+      { name: 'Computer Science', href: '/school/class-9/computer-science', icon: Monitor, color: '#8b5cf6' },
+    ],
+  },
+  {
     grade: 'class-10',
     label: 'Class 10',
     subtitle: 'SEE Preparation',
     subjects: [
       { name: 'Science', href: '/school/class-10/science', icon: Atom, color: '#6366f1' },
-      { name: 'Mathematics', href: '/school/class-10/mathematics', icon: Calculator, color: '#8b5cf6' },
-      { name: 'English', href: '/school/class-10/english', icon: BookMarked, color: '#ec4899' },
-      { name: 'Social Studies', href: '/school/class-10/social', icon: Globe, color: '#f59e0b' },
+      { name: 'Compulsory Mathematics', href: '/school/class-10/compulsory-mathematics', icon: Calculator, color: '#8b5cf6' },
+      { name: 'Optional Mathematics', href: '/school/class-10/optional-mathematics', icon: Sigma, color: '#ec4899' },
+      { name: 'Accounting/Office Management', href: '/school/class-10/accounting', icon: Briefcase, color: '#10b981' },
+      { name: 'Economics', href: '/school/class-10/economics', icon: LineChart, color: '#f59e0b' },
+      { name: 'Social Studies', href: '/school/class-10/social-studies', icon: Globe, color: '#3b82f6' },
+      { name: 'Computer Science', href: '/school/class-10/computer-science', icon: Monitor, color: '#8b5cf6' },
     ],
   },
   {

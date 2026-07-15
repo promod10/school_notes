@@ -8,7 +8,7 @@ export interface FrontMatter {
   title: string;
   description: string;
   subject: string;
-  level: 'class-10' | 'class-12' | 'bbs-1st-year' | 'bbs-2nd-year' | 'bbs-3rd-year' | 'bbs-4th-year' | 'bsc-1st-year' | 'bsc-2nd-year' | 'bsc-3rd-year';
+  level: 'class-8' | 'class-9' | 'class-10' | 'class-12' | 'bbs-1st-year' | 'bbs-2nd-year' | 'bbs-3rd-year' | 'bbs-4th-year' | 'bsc-1st-year' | 'bsc-2nd-year' | 'bsc-3rd-year';
   date: string;
   keywords: string[];
   author?: string;
