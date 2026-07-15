@@ -1,0 +1,151 @@
+---
+title: "Chemical Reactions and Equations"
+description: "Understand types of chemical reactions, balancing equations, and oxidation-reduction processes — with worked examples and a graded quiz."
+subject: "Science"
+level: "class-10"
+date: "2024-09-01"
+keywords: ["chemical reactions", "balanced equations", "oxidation reduction", "class 10 science", "SEE preparation"]
+author: "ConceptWeave Team"
+order: 1
+---
+
+## Introduction to Chemical Reactions
+
+A **chemical reaction** is a process in which one or more substances (reactants) are converted into one or more different substances (products). The atoms in reactants are rearranged to form new bonds, producing entirely new chemical species.
+
+> **Key Insight:** The total number of atoms of each element is *conserved* during a chemical reaction. This is the Law of Conservation of Mass.
+
+## Types of Chemical Reactions
+
+### 1. Combination Reactions
+
+Two or more reactants combine to form a **single product**.
+
+**General form:** $A + B \rightarrow AB$
+
+**Example:** Burning of magnesium in air.
+
+$$2\text{Mg}(s) + \text{O}_2(g) \rightarrow 2\text{MgO}(s)$$
+
+The magnesium burns with a brilliant white flame and produces magnesium oxide.
+
+### 2. Decomposition Reactions
+
+A single compound breaks down into **two or more simpler substances**.
+
+**General form:** $AB \rightarrow A + B$
+
+**Example:** Thermal decomposition of calcium carbonate (limestone).
+
+$$\text{CaCO}_3(s) \xrightarrow{\Delta} \text{CaO}(s) + \text{CO}_2(g)$$
+
+This reaction is used industrially to produce quicklime.
+
+### 3. Displacement Reactions
+
+A more reactive element replaces a less reactive element from its compound.
+
+**Example:** Iron displacing copper from copper sulfate solution.
+
+$$\text{Fe}(s) + \text{CuSO}_4(aq) \rightarrow \text{FeSO}_4(aq) + \text{Cu}(s)$$
+
+The blue colour of the solution fades as copper(II) ions are reduced.
+
+### 4. Double Displacement Reactions
+
+Two compounds exchange ions to form two new compounds.
+
+$$\text{AgNO}_3(aq) + \text{NaCl}(aq) \rightarrow \text{AgCl}(s)\downarrow + \text{NaNO}_3(aq)$$
+
+The white precipitate of silver chloride forms immediately.
+
+## Balancing Chemical Equations
+
+Balancing ensures the Law of Conservation of Mass is satisfied. Use Python to verify a balanced equation:
+
+```python
+def count_atoms(formula: str) -> dict[str, int]:
+    """
+    Counts atoms in a simple molecular formula.
+    E.g., 'H2O' → {'H': 2, 'O': 1}
+    """
+    import re
+    atoms: dict[str, int] = {}
+    pattern = r'([A-Z][a-z]?)(\d*)'
+    for element, count in re.findall(pattern, formula):
+        atoms[element] = atoms.get(element, 0) + (int(count) if count else 1)
+    return atoms
+
+# Verify: 2H₂ + O₂ → 2H₂O
+reactants = {'H': 4, 'O': 2}   # 2×H₂ + 1×O₂
+products  = {'H': 4, 'O': 2}   # 2×H₂O
+
+print("Balanced:", reactants == products)  # True
+```
+
+## Oxidation and Reduction (Redox)
+
+Oxidation and reduction always occur simultaneously — this is called a **redox reaction**.
+
+| Concept | Definition |
+|---------|-----------|
+| **Oxidation** | Loss of electrons / Gain of oxygen / Loss of hydrogen |
+| **Reduction** | Gain of electrons / Loss of oxygen / Gain of hydrogen |
+| **Oxidising agent** | The species that is reduced (gains electrons) |
+| **Reducing agent** | The species that is oxidised (loses electrons) |
+
+**Example — Rusting of iron:**
+
+$$4\text{Fe} + 3\text{O}_2 + 6\text{H}_2\text{O} \rightarrow 4\text{Fe(OH)}_3$$
+
+Iron is oxidised (loses electrons); oxygen is the oxidising agent.
+
+## Reaction Rate Factors
+
+The speed of a chemical reaction depends on:
+
+1. **Temperature** — Higher temperature increases kinetic energy and collision frequency
+2. **Concentration** — More particles per unit volume increases collision probability
+3. **Surface area** — Powdered zinc reacts faster with acid than zinc lumps
+4. **Catalyst** — Lowers activation energy without being consumed
+5. **Pressure** (for gases) — Increases concentration of gaseous reactants
+
+### Activation Energy
+
+Every reaction requires a minimum energy called **activation energy** ($E_a$). The Arrhenius equation describes this relationship:
+
+$$k = A \cdot e^{-E_a / RT}$$
+
+Where:
+- $k$ = rate constant
+- $A$ = frequency factor
+- $E_a$ = activation energy (J/mol)
+- $R$ = gas constant (8.314 J/mol·K)
+- $T$ = temperature (K)
+
+## Quick Reference Code: Molar Mass Calculator
+
+```python
+ATOMIC_MASS = {
+    'H': 1.008, 'He': 4.003, 'C': 12.011, 'N': 14.007,
+    'O': 15.999, 'Na': 22.990, 'Mg': 24.305, 'S': 32.06,
+    'Cl': 35.45, 'Ca': 40.078, 'Fe': 55.845, 'Cu': 63.546
+}
+
+def molar_mass(formula: str) -> float:
+    import re
+    total = 0.0
+    for element, count in re.findall(r'([A-Z][a-z]?)(\d*)', formula):
+        total += ATOMIC_MASS.get(element, 0) * (int(count) if count else 1)
+    return round(total, 3)
+
+print(molar_mass('H2O'))    # 18.015
+print(molar_mass('CaCO3'))  # 100.086
+print(molar_mass('H2SO4'))  # 98.072
+```
+
+
+<QuizLoader
+  title="Chemical Reactions Knowledge Check"
+  questionsJson='[{"id":"cr-q1","question":"Which type of chemical reaction involves two compounds exchanging their ions?","options":["Combination reaction","Decomposition reaction","Displacement reaction","Double displacement reaction"],"correctAnswerIndex":3,"explanation":"In a double displacement (metathesis) reaction, two ionic compounds exchange their ions to form two new compounds. AgNO₃ + NaCl → AgCl + NaNO₃ is a classic example.","hint":"Think about the word &#39;double&#39; — two things are being exchanged."},{"id":"cr-q2","question":"In the reaction Fe + CuSO₄ → FeSO₄ + Cu, what is oxidised?","options":["Copper","Iron","Sulphate ion","Both Fe and Cu"],"correctAnswerIndex":1,"explanation":"Iron (Fe) is oxidised — it loses electrons and goes from 0 to +2 oxidation state. Copper is reduced (gains electrons, going from +2 to 0).","hint":"Oxidation is loss (OIL) — which element is losing electrons here?"},{"id":"cr-q3","question":"What is the correctly balanced equation for the combustion of methane?","options":["CH₄ + O₂ → CO₂ + H₂O","CH₄ + 2O₂ → CO₂ + 2H₂O","2CH₄ + O₂ → 2CO₂ + H₂O","CH₄ + O₂ → CO + 2H₂O"],"correctAnswerIndex":1,"explanation":"CH₄ + 2O₂ → CO₂ + 2H₂O is balanced: Left: 1C, 4H, 4O. Right: 1C, 4H, 4O. ✓","hint":"Count the hydrogen atoms first — methane has 4H, so you need 2H₂O on the product side."},{"id":"cr-q4","question":"Which factor does NOT affect the rate of a chemical reaction?","options":["Temperature","Colour of reactants","Surface area","Concentration"],"correctAnswerIndex":1,"explanation":"The colour of reactants has no effect on reaction rate. Temperature, surface area, concentration, catalysts, and pressure (for gases) are the key rate factors."},{"id":"cr-q5","question":"A catalyst increases reaction rate by:","options":["Increasing the temperature","Being consumed in the reaction","Lowering the activation energy","Increasing the concentration of reactants"],"correctAnswerIndex":2,"explanation":"A catalyst provides an alternative reaction pathway with a lower activation energy (Ea), allowing more reactant molecules to have sufficient energy to react. The catalyst itself is not consumed.","hint":"Think about the Arrhenius equation — what variable does a catalyst change?"}]'
+/>

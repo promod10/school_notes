@@ -1,0 +1,183 @@
+---
+title: "Financial Ratio Analysis"
+description: "Master the key financial ratios used in accounting and business analysis — liquidity, profitability, solvency, and efficiency ratios — with solved examples."
+subject: "Financial Analysis"
+level: "bbs-4th-year"
+date: "2024-09-10"
+keywords: ["financial ratio analysis", "liquidity ratio", "profitability ratio", "BBS 4th year", "TU accounting"]
+author: "ConceptWeave Team"
+order: 1
+---
+
+## Introduction to Financial Ratio Analysis
+
+Financial ratio analysis is the process of evaluating a company's financial statements to assess its performance, liquidity, and solvency. Ratios transform raw financial data into **comparable metrics** usable across companies and time periods.
+
+> Ratios are only meaningful when compared against **industry benchmarks**, **historical trends**, or **competitor data**. A single ratio in isolation tells you very little.
+
+## Liquidity Ratios
+
+Liquidity ratios measure a firm's ability to meet **short-term obligations** without raising external capital.
+
+### Current Ratio
+
+$$\text{Current Ratio} = \frac{\text{Current Assets}}{\text{Current Liabilities}}$$
+
+**Interpretation:**
+- $> 2$: Excellent short-term liquidity
+- $1.5 - 2$: Acceptable
+- $< 1$: Potential liquidity crisis (current liabilities exceed current assets)
+
+### Quick (Acid-Test) Ratio
+
+Excludes inventory (least liquid current asset):
+
+$$\text{Quick Ratio} = \frac{\text{Current Assets} - \text{Inventory}}{\text{Current Liabilities}}$$
+
+### Cash Ratio
+
+Most conservative liquidity measure:
+
+$$\text{Cash Ratio} = \frac{\text{Cash + Cash Equivalents}}{\text{Current Liabilities}}$$
+
+## Profitability Ratios
+
+These measure how effectively a company generates profit from its resources.
+
+### Gross Profit Margin
+
+$$\text{Gross Profit Margin} = \frac{\text{Revenue} - \text{COGS}}{\text{Revenue}} \times 100\%$$
+
+### Net Profit Margin
+
+$$\text{Net Profit Margin} = \frac{\text{Net Income}}{\text{Revenue}} \times 100\%$$
+
+### Return on Equity (ROE)
+
+$$\text{ROE} = \frac{\text{Net Income}}{\text{Shareholders' Equity}} \times 100\%$$
+
+### Return on Assets (ROA)
+
+$$\text{ROA} = \frac{\text{Net Income}}{\text{Total Assets}} \times 100\%$$
+
+### DuPont Analysis
+
+ROE can be decomposed using the **DuPont Formula**:
+
+$$\text{ROE} = \underbrace{\frac{\text{Net Income}}{\text{Revenue}}}_{\text{Profit Margin}} \times \underbrace{\frac{\text{Revenue}}{\text{Total Assets}}}_{\text{Asset Turnover}} \times \underbrace{\frac{\text{Total Assets}}{\text{Equity}}}_{\text{Financial Leverage}}$$
+
+## Solvency (Leverage) Ratios
+
+These assess long-term financial stability and reliance on debt.
+
+### Debt-to-Equity Ratio
+
+$$D/E = \frac{\text{Total Debt}}{\text{Shareholders' Equity}}$$
+
+### Interest Coverage Ratio
+
+$$\text{ICR} = \frac{\text{EBIT}}{\text{Interest Expense}}$$
+
+An ICR below 1.5 signals potential default risk.
+
+## Efficiency (Activity) Ratios
+
+### Inventory Turnover
+
+$$\text{Inventory Turnover} = \frac{\text{COGS}}{\text{Average Inventory}}$$
+
+### Accounts Receivable Turnover
+
+$$\text{AR Turnover} = \frac{\text{Net Credit Sales}}{\text{Average Accounts Receivable}}$$
+
+### Days Sales Outstanding (DSO)
+
+$$\text{DSO} = \frac{365}{\text{AR Turnover}}$$
+
+## Solved Example: ABC Manufacturing Ltd.
+
+Given the following data (in NPR '000):
+
+| Item | Value |
+|------|-------|
+| Current Assets | 4,500 |
+| Inventory | 1,200 |
+| Current Liabilities | 2,000 |
+| Revenue | 18,000 |
+| COGS | 12,600 |
+| Net Income | 2,160 |
+| Total Assets | 24,000 |
+| Shareholders' Equity | 9,600 |
+| Total Debt | 14,400 |
+| EBIT | 2,880 |
+| Interest Expense | 720 |
+
+**Calculations:**
+
+$$\text{Current Ratio} = \frac{4,500}{2,000} = 2.25 \quad \checkmark$$
+
+$$\text{Quick Ratio} = \frac{4,500 - 1,200}{2,000} = \frac{3,300}{2,000} = 1.65 \quad \checkmark$$
+
+$$\text{Net Profit Margin} = \frac{2,160}{18,000} \times 100 = 12\%$$
+
+$$\text{ROE} = \frac{2,160}{9,600} \times 100 = 22.5\%$$
+
+$$\text{D/E Ratio} = \frac{14,400}{9,600} = 1.5$$
+
+$$\text{ICR} = \frac{2,880}{720} = 4.0 \quad \text{(Healthy)}$$
+
+## Python Implementation: Ratio Calculator
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class FinancialData:
+    """Financial statement data for ratio analysis."""
+    current_assets: float
+    current_liabilities: float
+    inventory: float
+    cash: float
+    revenue: float
+    cogs: float
+    net_income: float
+    total_assets: float
+    shareholders_equity: float
+    total_debt: float
+    ebit: float
+    interest_expense: float
+
+def compute_ratios(d: FinancialData) -> dict[str, float]:
+    return {
+        # Liquidity
+        'current_ratio':      d.current_assets / d.current_liabilities,
+        'quick_ratio':        (d.current_assets - d.inventory) / d.current_liabilities,
+        'cash_ratio':         d.cash / d.current_liabilities,
+        # Profitability
+        'gross_margin_%':     (d.revenue - d.cogs) / d.revenue * 100,
+        'net_margin_%':       d.net_income / d.revenue * 100,
+        'roa_%':              d.net_income / d.total_assets * 100,
+        'roe_%':              d.net_income / d.shareholders_equity * 100,
+        # Leverage
+        'd_e_ratio':          d.total_debt / d.shareholders_equity,
+        'icr':                d.ebit / d.interest_expense,
+    }
+
+# ABC Manufacturing data
+abc = FinancialData(
+    current_assets=4500, current_liabilities=2000,
+    inventory=1200, cash=800, revenue=18000,
+    cogs=12600, net_income=2160, total_assets=24000,
+    shareholders_equity=9600, total_debt=14400,
+    ebit=2880, interest_expense=720
+)
+
+for name, value in compute_ratios(abc).items():
+    print(f"{name:20s}: {value:.2f}")
+```
+
+
+<QuizLoader
+  title="Financial Ratio Analysis Quiz"
+  questionsJson='[{"id":"fin-q1","question":"A company has Current Assets of NPR 6,00,000 and Current Liabilities of NPR 2,00,000. What is the current ratio?","options":["2.0","3.0","0.33","4.0"],"correctAnswerIndex":1,"explanation":"Current Ratio = Current Assets / Current Liabilities = 6,00,000 / 2,00,000 = 3.0. This indicates strong short-term liquidity.","hint":"Simply divide current assets by current liabilities."},{"id":"fin-q2","question":"Which ratio excludes inventory from the liquidity calculation?","options":["Current Ratio","Cash Ratio","Quick (Acid-Test) Ratio","Inventory Turnover Ratio"],"correctAnswerIndex":2,"explanation":"The Quick Ratio = (Current Assets − Inventory) / Current Liabilities. It excludes inventory because inventory may not be quickly convertible to cash.","hint":"Think about which assets can be quickly converted to cash — inventory is the least liquid."},{"id":"fin-q3","question":"In the DuPont analysis, ROE is decomposed into which three components?","options":["Liquidity × Solvency × Efficiency","Profit Margin × Asset Turnover × Financial Leverage","Gross Margin × Net Margin × EBITDA","ROA × D/E Ratio × ICR"],"correctAnswerIndex":1,"explanation":"DuPont Formula: ROE = (Net Income/Revenue) × (Revenue/Total Assets) × (Total Assets/Equity), which equals Profit Margin × Asset Turnover × Financial Leverage.","hint":"The DuPont framework breaks ROE into operational efficiency, asset efficiency, and leverage."},{"id":"fin-q4","question":"An Interest Coverage Ratio (ICR) of 0.8 indicates:","options":["The company can easily cover its interest payments","The company&#39;s EBIT is insufficient to cover interest — default risk is high","The company is highly profitable","The company has no debt"],"correctAnswerIndex":1,"explanation":"ICR = EBIT / Interest Expense. An ICR of 0.8 means EBIT is only 80% of interest due — the company cannot cover its interest from operating income, indicating serious financial distress.","hint":"ICR < 1 means operating profit cannot even cover interest payments."}]'
+/>

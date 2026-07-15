@@ -1,0 +1,161 @@
+---
+title: "Wave Optics: Interference and Diffraction"
+description: "Explore the wave nature of light through Young's double-slit experiment, single-slit diffraction, and the diffraction grating — with full mathematical derivations."
+subject: "Physics"
+level: "bsc-2nd-year"
+date: "2024-09-15"
+keywords: ["wave optics", "interference", "diffraction", "Young's double slit", "BSc physics", "TU BSc"]
+author: "ConceptWeave Team"
+order: 1
+---
+
+## The Wave Nature of Light
+
+The wave theory of light, developed by Christiaan Huygens and confirmed by Thomas Young's landmark 1801 experiment, describes light as a **transverse electromagnetic wave**. Wave optics explains phenomena that the particle (ray) model cannot — interference, diffraction, and polarization.
+
+## Coherence and Superposition
+
+Two sources are **coherent** if they maintain a constant phase difference over time. Only coherent sources produce observable interference patterns.
+
+The **Principle of Superposition** states:
+
+$$\psi_{\text{total}}(\mathbf{r}, t) = \psi_1(\mathbf{r}, t) + \psi_2(\mathbf{r}, t)$$
+
+For two waves of equal amplitude $A$ and a phase difference $\delta$:
+
+$$I = 4I_0 \cos^2\!\left(\frac{\delta}{2}\right)$$
+
+Where $I_0 = A^2$ is the intensity of each individual wave.
+
+## Young's Double-Slit Experiment
+
+### Setup and Path Difference
+
+Two narrow slits $S_1$ and $S_2$ separated by distance $d$ are illuminated by a monochromatic source. At a point $P$ on a screen at distance $D$:
+
+$$\Delta = d\sin\theta \approx \frac{dy}{D} \quad (\text{for small } \theta)$$
+
+Where $y$ is the vertical distance from the central maximum.
+
+### Conditions for Bright and Dark Fringes
+
+| Condition | Path Difference $\Delta$ | Result |
+|-----------|--------------------------|--------|
+| Constructive | $\Delta = m\lambda$ | **Bright fringe** |
+| Destructive | $\Delta = \left(m + \frac{1}{2}\right)\lambda$ | **Dark fringe** |
+
+where $m = 0, \pm 1, \pm 2, \ldots$
+
+### Fringe Width
+
+The spacing between consecutive bright (or dark) fringes:
+
+$$\beta = \frac{\lambda D}{d}$$
+
+**Key relationships:**
+- Increasing $D$ → wider fringes ($\beta \propto D$)
+- Increasing $d$ → narrower fringes ($\beta \propto 1/d$)
+- Longer wavelength → wider fringes ($\beta \propto \lambda$)
+
+### Intensity Distribution
+
+The intensity at angle $\theta$:
+
+$$I(\theta) = I_{\max} \cos^2\!\left(\frac{\pi d \sin\theta}{\lambda}\right)$$
+
+## Single-Slit Diffraction
+
+When light passes through a single slit of width $a$, it spreads into a diffraction pattern.
+
+### Minima Condition
+
+$$a\sin\theta = m\lambda \quad (m = \pm 1, \pm 2, \ldots)$$
+
+The **angular half-width** of the central maximum:
+
+$$\theta_{\text{min}} = \arcsin\!\left(\frac{\lambda}{a}\right) \approx \frac{\lambda}{a}$$
+
+### Intensity Formula
+
+$$I(\theta) = I_0 \left[\frac{\sin(\alpha)}{\alpha}\right]^2 \quad \text{where } \alpha = \frac{\pi a \sin\theta}{\lambda}$$
+
+This $\text{sinc}^2$ function produces the characteristic central bright maximum flanked by progressively weaker secondary maxima.
+
+## Diffraction Grating
+
+A diffraction grating with $N$ slits separated by $d$ (grating constant) produces **sharp, bright principal maxima** at angles satisfying:
+
+$$d\sin\theta = m\lambda$$
+
+### Resolving Power
+
+$$R = \frac{\lambda}{\Delta\lambda} = mN$$
+
+where $\Delta\lambda$ is the minimum resolvable wavelength difference.
+
+**Example:** A grating with 600 lines/mm and $m = 2$ has:
+
+$$d = \frac{1}{600} \text{ mm} = 1.667 \times 10^{-6} \text{ m}$$
+
+$$R = mN = 2 \times 600 \times 10^3 = 1.2 \times 10^6 \text{ per metre}$$
+
+## Numerical Simulation: Young's Double-Slit
+
+```python
+import numpy as np
+import math
+
+def youngs_intensity(
+    y_values: np.ndarray,
+    wavelength: float,  # metres
+    slit_sep: float,    # d in metres
+    screen_dist: float  # D in metres
+) -> np.ndarray:
+    """
+    Calculate normalised intensity pattern for Young's double-slit.
+    y_values: array of screen positions (metres)
+    """
+    delta = slit_sep * y_values / screen_dist  # path difference
+    phase = (2 * np.pi / wavelength) * delta
+    intensity = np.cos(phase / 2) ** 2
+    return intensity
+
+# Parameters
+lam = 550e-9   # 550 nm (green light)
+d   = 0.5e-3   # 0.5 mm slit separation
+D   = 1.0      # 1 m screen distance
+
+y = np.linspace(-5e-3, 5e-3, 1000)  # ±5 mm
+I = youngs_intensity(y, lam, d, D)
+
+fringe_width = lam * D / d
+print(f"Fringe width β = {fringe_width * 1e3:.3f} mm")
+# β = 1.100 mm ✓
+
+# Find fringe positions (maxima)
+threshold = 0.99
+maxima_y = y[I > threshold] * 1e3  # convert to mm
+print(f"Bright fringe positions (mm): {maxima_y[:5].round(2)}")
+```
+
+## Rayleigh's Criterion for Resolution
+
+Two point sources are just resolved when the central maximum of one falls on the first minimum of the other:
+
+$$\theta_{\text{min}} = 1.22 \frac{\lambda}{D}$$
+
+Where $D$ is the aperture diameter. The factor 1.22 arises from the Bessel function zero for a circular aperture.
+
+**Telescope example:** Hubble Space Telescope ($D = 2.4\text{ m}$, $\lambda = 500\text{ nm}$):
+
+$$\theta_{\text{min}} = 1.22 \times \frac{500 \times 10^{-9}}{2.4} = 2.54 \times 10^{-7} \text{ rad}$$
+
+At the Moon's distance ($d = 3.84 \times 10^8\text{ m}$), the minimum resolvable separation is:
+
+$$\Delta x = \theta_{\text{min}} \times d \approx 97.5 \text{ m}$$
+
+
+<QuizLoader
+  title="Wave Optics Quiz"
+  questionsJson='[{"id":"optics-q1","question":"In Young&#39;s double-slit experiment, if the slit separation is doubled while keeping all other parameters constant, the fringe width will:","options":["Double","Remain the same","Halve","Quadruple"],"correctAnswerIndex":2,"explanation":"Fringe width β = λD/d. Since β ∝ 1/d, doubling d (slit separation) halves the fringe width. The fringes become narrower and more closely spaced.","hint":"Write out the formula β = λD/d and see how β changes when d → 2d."},{"id":"optics-q2","question":"The sinc² function describes the intensity pattern in which phenomenon?","options":["Double-slit interference","Single-slit diffraction","Diffraction grating principal maxima","Rayleigh scattering"],"correctAnswerIndex":1,"explanation":"Single-slit diffraction produces an intensity pattern I(θ) = I₀[sin(α)/α]² — the sinc² function — with a wide central maximum and progressively weaker secondary maxima.","hint":"The sinc² pattern has a single dominant central maximum, unlike the cosine² pattern of double-slit interference."},{"id":"optics-q3","question":"Two coherent sources are necessary for sustained interference. What does &#39;coherent&#39; mean?","options":["Sources have equal intensities","Sources emit the same wavelength","Sources maintain a constant phase difference","Sources are at the same location"],"correctAnswerIndex":2,"explanation":"Coherent sources maintain a constant (time-independent) phase difference. Without this, the interference pattern shifts randomly and averages out, making it unobservable.","hint":"Coherence is about phase relationship over time, not just identical wavelengths."}]'
+/>
