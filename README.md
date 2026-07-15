@@ -3,6 +3,7 @@
 ConceptWeave is a modern, SEO-optimized educational portal built with Next.js 15, tailored for Secondary School (Class 8 - 12) and Undergraduate (All faculty and Subjects) students. It features interactive quizzes, full LaTeX math support, and ultra-fast static site generation (SSG) with local search powered by Pagefind.
 
 ###### project Demo: www.cpramod.com.np
+###### Temporary URL Vercel : https://school-notes-eight.vercel.app/
 
 ## 🚀 Quick Start (Development)
 
